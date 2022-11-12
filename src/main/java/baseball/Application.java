@@ -15,7 +15,6 @@ public class Application {
     public static final String ballUnit = "볼 ";
     public static final String nothingUnit = "낫싱";
     public static final String winCondition = "3스트라이크";
-    public static final String end = "종료";
     public static final String optionRestartOrEnd = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
     public static final String restart = "1";
     public static final String playerWinMessage = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
@@ -42,7 +41,7 @@ public class Application {
             return computer;
         }
 
-        public static String oneGameSet(List<Integer> computer) {
+        public static void oneGameSet(List<Integer> computer) {
             boolean flag = true;
             while (flag){
                 List<String> player = inputPlayerAnswerList();
@@ -53,7 +52,6 @@ public class Application {
                     flag = false;
                 }
             }
-            return end;
         }
 
         private static List<String> inputPlayerAnswerList(){
