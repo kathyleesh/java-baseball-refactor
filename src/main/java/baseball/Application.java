@@ -23,14 +23,14 @@ public class Application {
     public static void main(String[] args) {
         System.out.println(gameStartMessage);
 
-        List<Integer> computer = Game.makeRandomNumberList();
+        List<Integer> computer = Game.makeRandomNumbers();
         Game.oneGameSet(computer);
 
         restartOrEndTheGame();
     }
 
     public static class Game {
-        public static List<Integer> makeRandomNumberList(){
+        public static List<Integer> makeRandomNumbers(){
             List<Integer> computer = new ArrayList<>();
             while (computer.size() < 3) {
                 int randomNumber = Randoms.pickNumberInRange(1, 9);
@@ -44,7 +44,7 @@ public class Application {
         public static void oneGameSet(List<Integer> computer) {
             boolean flag = true;
             while (flag){
-                List<String> player = inputPlayerAnswerList();
+                List<String> player = inputPlayerAnswer();
                 String hint = checkAnswer(computer, player);
                 System.out.println(hint);
                 if (hint.contains(winCondition)){
@@ -54,21 +54,21 @@ public class Application {
             }
         }
 
-        private static List<String> inputPlayerAnswerList(){
+        private static List<String> inputPlayerAnswer(){
             System.out.print(playerAnswer);
             String myAnswer = Console.readLine();
 
             String[] splitAnswer = myAnswer.split("");
-            ArrayList<String> answerList = new ArrayList<>(Arrays.asList(splitAnswer));
+            ArrayList<String> answerValue= new ArrayList<>(Arrays.asList(splitAnswer));
 
-            if (!(answerList.size() == 3)){
+            if (!(answerValue.size() == 3)){
                 throw new IllegalArgumentException();
             }
             else {
                 System.out.println(myAnswer);
             }
 
-            return answerList;
+            return answerValue;
         }
 
         public static String checkAnswer(List<Integer> computer, List<String> player){
@@ -112,7 +112,7 @@ public class Application {
             String restartOrEnd = Console.readLine();
             System.out.println(restartOrEnd);
             if (Objects.equals(restartOrEnd, restart)){
-                List<Integer> computerturn = Game.makeRandomNumberList();
+                List<Integer> computerturn = Game.makeRandomNumbers();
                 Game.oneGameSet(computerturn);
             }
             else {
