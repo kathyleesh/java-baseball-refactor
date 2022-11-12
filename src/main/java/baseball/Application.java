@@ -8,8 +8,21 @@ import java.util.List;
 import java.util.Objects;
 
 public class Application {
+
+    public static final String gameStartMessage = "숫자 야구 게임을 시작합니다.";
+    public static final String playerAnswer = "숫자를 입력해주세요 : ";
+    public static final String strikeUnit = "스트라이크";
+    public static final String ballUnit = "볼 ";
+    public static final String nothingUnit = "낫싱";
+    public static final String winCondition = "3스트라이크";
+    public static final String end = "종료";
+    public static final String optionRestartOrEnd = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+    public static final String restart = "1";
+    public static final String playerWinMessage = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+    public static final String gameEnd = "게임을 종료합니다.";
+
     public static void main(String[] args) {
-        System.out.println("숫자 야구 게임을 시작합니다.");
+        System.out.println(gameStartMessage);
 
         List<Integer> computer = Game.makeRandomNumberList();
         Game.oneGameSet(computer);
@@ -35,16 +48,16 @@ public class Application {
                 List<String> player = inputPlayerAnswerList();
                 String hint = checkAnswer(computer, player);
                 System.out.println(hint);
-                if (hint.contains("3스트라이크")){
-                    System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+                if (hint.contains(winCondition)){
+                    System.out.println(playerWinMessage);
                     flag = false;
                 }
             }
-            return "종료";
+            return end;
         }
 
         private static List<String> inputPlayerAnswerList(){
-            System.out.print("숫자를 입력해주세요 : ");
+            System.out.print(playerAnswer);
             String myAnswer = Console.readLine();
 
             String[] splitAnswer = myAnswer.split("");
@@ -79,17 +92,17 @@ public class Application {
         private static String giveHint(int strike, int ball, int nothing){
             if (nothing != 3){
                 if (ball == 0) {
-                    return (strike + "스트라이크");
+                    return (strike + strikeUnit);
                 }
                 else if (strike == 0) {
-                    return (ball + "볼 ");
+                    return (ball + ballUnit);
                 }
                 else {
-                    return (ball + "볼 " + strike + "스트라이크");
+                    return (ball + ballUnit + strike + strikeUnit);
                 }
             }
             else {
-                return ("낫싱");
+                return (nothingUnit);
             }
         }
     }
@@ -97,16 +110,16 @@ public class Application {
     private static void restartOrEndTheGame(){
         boolean flag = true;
         while (flag){
-            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+            System.out.println(optionRestartOrEnd);
             String restartOrEnd = Console.readLine();
             System.out.println(restartOrEnd);
-            if (Objects.equals(restartOrEnd, "1")){
+            if (Objects.equals(restartOrEnd, restart)){
                 List<Integer> computerturn = Game.makeRandomNumberList();
                 Game.oneGameSet(computerturn);
             }
             else {
                 flag = false;
-                System.out.println("게임을 종료합니다.");
+                System.out.println(gameEnd);
             }
         }
     }
