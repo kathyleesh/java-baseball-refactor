@@ -2,6 +2,7 @@ package implement;
 
 import baseball.Application;
 
+import baseball.domain.Game;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,14 +21,14 @@ public class FunctionTest extends NsTest {
     @Test
     @DisplayName("랜덤 숫자를 생성하는 리스트에 3자리가 생성되는지 확인")
     void 리스트에_3자리_생성() {
-        List<Integer> randomNumber = Application.Game.makeRandomNumbers();
+        List<Integer> randomNumber = Game.makeRandomNumbers();
         assertThat(randomNumber.size() == 3);
     }
 
     @Test
     @DisplayName("랜덤 숫자를 생성하는 리스트에 있는 3자리의 숫자가 1부터 9까지의 숫자 중에 서로 다른 수가 들어가 있는지 확인")
     void 서로_다른_수_3자리를_1부터_9까지_랜덤으로_생성() {
-        List<Integer> randomNumber = Application.Game.makeRandomNumbers();
+        List<Integer> randomNumber = Game.makeRandomNumbers();
         assertNotEquals(randomNumber.get(0), randomNumber.get(1));
         assertNotEquals(randomNumber.get(0), randomNumber.get(2));
         assertNotEquals(randomNumber.get(1), randomNumber.get(2));
@@ -38,7 +39,7 @@ public class FunctionTest extends NsTest {
     void 힌트_출력_여부_낫싱_제외() {
         List<Integer> computer = List.of(1, 2, 3);
         List<String> player = List.of("1", "3", "4");
-        String giveHint = Application.Game.checkAnswer(computer,player);
+        String giveHint = Game.checkAnswer(computer,player);
         assertThat(giveHint).isEqualTo("1볼 1스트라이크");
     }
 
@@ -47,7 +48,7 @@ public class FunctionTest extends NsTest {
     void 힌트_출력_여부_낫싱() {
         List<Integer> computer = List.of(1, 2, 3);
         List<String> player = List.of("4", "5", "6");
-        String giveHint = Application.Game.checkAnswer(computer,player);
+        String giveHint = Game.checkAnswer(computer,player);
         assertThat(giveHint).isEqualTo("낫싱");
     }
 
@@ -56,7 +57,7 @@ public class FunctionTest extends NsTest {
     void 정답일_때_출력_확인() {
         List<Integer> computer = List.of(1, 2, 3);
         List<String> player = List.of("1", "2", "3");
-        String giveHint = Application.Game.checkAnswer(computer, player);
+        String giveHint = Game.checkAnswer(computer, player);
         assertThat(giveHint).isEqualTo("3스트라이크");
     }
 
